@@ -29,7 +29,8 @@ $dbConfig = [
     'username' => 'root',
     'password' => 'root',
     'database' => 'test',
-    'hostport' => 3306
+    'hostport' => 3306,
+    'charset'=>'utf8'
 ];
 
 / / This part is the key configuration in the data table. If it is consistent with the default, you can configure it.

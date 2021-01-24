@@ -80,15 +80,17 @@ class InfiniteTree
             'username' => $userName,
             'password' => $password,
             'database' => $dataBase,
-            'hostport' => $port
+            'hostport' => $port,
+            'charset' => $charset,
             ) = $dbConfig;
         try {
-            $this->_db = mysqli_connect($host, $userName, $password, $dataBase, (int)$port);
+            $this->_db = mysqli_connect($host, $userName, $password, $dataBase, $port);
+            mysqli_set_charset( $this->_db,$charset);
         } catch (\Exception $e) {
             throw $e;
         }
     }
-    
+
 
     /**
      * 配置对应的键
@@ -288,7 +290,7 @@ class InfiniteTree
     }
 
     /**
-     * 插入新节点
+     * 插入新节点 (返回自增id)
      * @param $parentId
      * @param array $data
      * @param string $position
@@ -320,8 +322,9 @@ class InfiniteTree
         $tmpData = array_merge($node, $data);
         //查询键
         if ($this->_insert($tmpData) === true) {
+            $insertId=$this->_db->insert_id;
             $this->_db->commit();
-            return true;
+            return $insertId;
         }
         return false;
     }

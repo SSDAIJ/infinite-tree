@@ -31,7 +31,8 @@ $dbConfig = [
     'username' => 'root',
     'password' => 'root',
     'database' => 'test',
-    'hostport' => 3306
+    'hostport' => 3306,
+    'charset'=>'utf8'
 ];
 
 //这一部分是数据表中的键配置如果和默认一致可以不用配置
